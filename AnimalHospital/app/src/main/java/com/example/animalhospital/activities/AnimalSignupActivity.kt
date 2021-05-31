@@ -1,9 +1,12 @@
 package com.example.animalhospital.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
+import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
 import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
@@ -22,10 +25,12 @@ class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var ageTextWatcher: FieldTextWatcher
     private lateinit var animalTypeSp: Spinner
     private lateinit var signUpButton: Button
+    private lateinit var animals: ArrayList<Animal>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animal_signup)
+        animals = intent.extras?.get(Constants.animalsKey) as ArrayList<Animal>
 
         initializeFields()
         attachTextWatchers()
@@ -78,7 +83,17 @@ class AnimalSignupActivity : AppCompatActivity() {
             && ageTextWatcher.isValidState()
     }
 
-    private fun onSubmit() {
+    fun handleOnSignupClick(view: View) {
+        val newAnimal = getAnimalFromModel()
+        animals.add(newAnimal)
+    }
 
+    private fun getAnimalFromModel(): Animal {
+        return Animal(
+            nameEt.text.toString(),
+            AnimalType.valueOf(animalTypeSp.selectedItem.toString()),
+            breedEt.text.toString(),
+            ageEt.text.toString().toInt()
+        )
     }
 }

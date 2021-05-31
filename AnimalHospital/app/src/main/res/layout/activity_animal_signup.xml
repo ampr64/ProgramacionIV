@@ -61,6 +61,7 @@
             android:id="@+id/btn_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="handleOnSignupClick"
             android:text="@string/animal_signup_signPup" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
