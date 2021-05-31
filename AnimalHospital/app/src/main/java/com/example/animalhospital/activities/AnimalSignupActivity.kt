@@ -10,7 +10,7 @@ import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
 import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
 import com.example.animalhospital.textWatchers.FieldTextWatcher
 
-class AnimalSignup : AppCompatActivity() {
+class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText
     private lateinit var nameTv: TextView
     private lateinit var nameTextWatcher: FieldTextWatcher

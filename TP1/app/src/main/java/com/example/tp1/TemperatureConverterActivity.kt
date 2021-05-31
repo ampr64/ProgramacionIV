@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class TemperatureConverter : AppCompatActivity() {
+class TemperatureConverterActivity : AppCompatActivity() {
     private val celsiusSymbol = "°C"
     private val fahrenheitSymbol = "°F"
     private lateinit var input: EditText

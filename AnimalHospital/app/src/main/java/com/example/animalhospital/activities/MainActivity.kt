@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun navigateToAnimalSignup(view: View) {
-        val intent = Intent(this, AnimalSignup::class.java)
+        val intent = Intent(this, AnimalSignupActivity::class.java)
         startActivity(intent)
     }
 }

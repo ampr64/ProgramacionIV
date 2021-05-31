@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun switchToTemperatureConverter(view: View) {
-        val intent = Intent(this, TemperatureConverter::class.java)
+        val intent = Intent(this, TemperatureConverterActivity::class.java)
         startActivity(intent)
     }
 }

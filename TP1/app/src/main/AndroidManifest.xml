@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TP1">
-        <activity android:name=".TemperatureConverter"></activity>
+        <activity android:name=".TemperatureConverterActivity"></activity>
         <activity android:name=".PalindromeCheckerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
