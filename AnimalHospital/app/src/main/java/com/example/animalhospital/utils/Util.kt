@@ -1,4 +1,4 @@
-package com.example.animalhospital
+package com.example.animalhospital.utils
 
 import android.graphics.Color
 import android.widget.TextView

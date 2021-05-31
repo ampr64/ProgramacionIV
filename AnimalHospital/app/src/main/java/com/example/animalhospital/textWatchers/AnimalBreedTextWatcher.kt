@@ -1,7 +1,7 @@
 package com.example.animalhospital.textWatchers
 
 import android.widget.TextView
-import com.example.animalhospital.Util
+import com.example.animalhospital.utils.Util
 import com.example.animalhospital.models.FieldState
 
 class AnimalBreedTextWatcher(outputElement: TextView): FieldTextWatcher(outputElement) {

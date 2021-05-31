@@ -3,7 +3,7 @@ package com.example.animalhospital.textWatchers
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
-import com.example.animalhospital.Util
+import com.example.animalhospital.utils.Util
 import com.example.animalhospital.models.FieldState
 
 abstract class FieldTextWatcher(protected val outputElement: TextView) : TextWatcher {

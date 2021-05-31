@@ -1,8 +1,9 @@
-package com.example.animalhospital
+package com.example.animalhospital.activities
 
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.animalhospital.R
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
 import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
