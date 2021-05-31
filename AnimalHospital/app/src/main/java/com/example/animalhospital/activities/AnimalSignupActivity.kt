@@ -1,11 +1,10 @@
 package com.example.animalhospital.activities
 
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
-import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.constants.IntentConstants
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
@@ -14,6 +13,7 @@ import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
 import com.example.animalhospital.textWatchers.FieldTextWatcher
 
 class AnimalSignupActivity : AppCompatActivity() {
+    private lateinit var animals: ArrayList<Animal>
     private lateinit var nameEt: EditText
     private lateinit var nameTv: TextView
     private lateinit var nameTextWatcher: FieldTextWatcher
@@ -25,18 +25,18 @@ class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var ageTextWatcher: FieldTextWatcher
     private lateinit var animalTypeSp: Spinner
     private lateinit var signUpButton: Button
-    private lateinit var animals: ArrayList<Animal>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animal_signup)
-        animals = intent.extras?.get(Constants.animalsKey) as ArrayList<Animal>
 
         initializeFields()
-        attachTextWatchers()
+        setListeners()
     }
 
     private fun initializeFields() {
+        animals = intent.extras?.get(IntentConstants.animalsKey) as ArrayList<Animal>
+
         nameEt = findViewById<EditText>(R.id.et_animalName)
         nameTv = findViewById<TextView>(R.id.tv_animalName)
         nameTextWatcher = AnimalNameTextWatcher(nameTv)
@@ -61,10 +61,14 @@ class AnimalSignupActivity : AppCompatActivity() {
         animalTypeSp.adapter = animalTypeAdapter
     }
 
-    private fun attachTextWatchers() {
+    private fun setListeners() {
         nameEt.addTextChangedListener(nameTextWatcher)
         breedEt.addTextChangedListener(breedTextWatcher)
         ageEt.addTextChangedListener(ageTextWatcher)
+
+        signUpButton.setOnClickListener {
+            handleOnSignupClick()
+        }
     }
 
     override fun onUserInteraction() {
@@ -83,7 +87,7 @@ class AnimalSignupActivity : AppCompatActivity() {
             && ageTextWatcher.isValidState()
     }
 
-    fun handleOnSignupClick(view: View) {
+    private fun handleOnSignupClick() {
         val newAnimal = getAnimalFromModel()
         animals.add(newAnimal)
     }
@@ -91,7 +95,7 @@ class AnimalSignupActivity : AppCompatActivity() {
     private fun getAnimalFromModel(): Animal {
         return Animal(
             nameEt.text.toString(),
-            AnimalType.valueOf(animalTypeSp.selectedItem.toString()),
+            AnimalType.getByDisplayName(animalTypeSp.selectedItem.toString()),
             breedEt.text.toString(),
             ageEt.text.toString().toInt()
         )

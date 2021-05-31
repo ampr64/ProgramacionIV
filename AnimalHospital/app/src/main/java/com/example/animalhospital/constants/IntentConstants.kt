@@ -1,7 +1,7 @@
 package com.example.animalhospital.constants
 
-class Constants {
+class IntentConstants {
     companion object {
-        val animalsKey = "animals"
+        const val animalsKey = "animals"
     }
 }

@@ -8,6 +8,12 @@ enum class AnimalType(private val displayName: String) {
     DOG("Dog"),
     BUNNY("Bunny");
 
+    companion object {
+        fun getByDisplayName(displayName: String): AnimalType {
+            return AnimalType.valueOf(displayName.uppercase())
+        }
+    }
+
     override fun toString(): String {
         return displayName
     }

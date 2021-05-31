@@ -2,7 +2,7 @@ package com.example.animalhospital.utils
 
 import android.graphics.Color
 import android.widget.TextView
-import com.example.animalhospital.models.FieldState
+import com.example.animalhospital.models.Result
 
 class Util {
     companion object {
@@ -22,11 +22,11 @@ class Util {
             return "$fieldName must be between $minValue and $maxValue"
         }
 
-        fun displayMessageIfError(fieldState: FieldState, outputElement: TextView) {
+        fun displayMessageIfError(result: Result, outputElement: TextView) {
             clearMessage(outputElement)
 
-            if (!fieldState.valid) {
-                outputElement.text = fieldState.message
+            if (!result.success) {
+                outputElement.text = result.error
                 outputElement.setTextColor(Color.RED)
             }
         }
