@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Manchester Pups HealthCare</string>
+
+    <string name="main_animal_signup">Sign up new pup</string>
+    <string name="main_new_examination">New examination</string>
+
+    <string name="animal_signup_pup_name">Pup\'s name</string>
+    <string name="animal_signup_breed">Pup\'s breed</string>
+    <string name="animal_signup_age">Pup\'s age</string>
+    <string name="animal_signup_signPup">Sign (p)up</string>
+
+</resources>

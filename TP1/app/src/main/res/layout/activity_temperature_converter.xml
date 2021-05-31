@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TemperatureConverter">
+
+    <TextView
+        android:id="@+id/temperature_converter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="51dp"
+        android:text="@string/c_to_f_converter"
+        android:textColor="#9C27B0"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/inputCelsius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/inputCelsius"
+        android:layout_width="247dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="34dp"
+        android:maxLength="3"
+        android:hint="Enter temperature in Celsius"
+        android:inputType="text"
+        android:digits="0123456789"
+        app:layout_constraintBottom_toTopOf="@+id/outputFahrenheit"
+        app:layout_constraintStart_toStartOf="@+id/temperature_converter_title"
+        app:layout_constraintTop_toBottomOf="@+id/temperature_converter_title" />
+
+    <TextView
+        android:id="@+id/outputFahrenheit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="435dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/inputCelsius"
+        app:layout_constraintStart_toStartOf="@+id/inputCelsius"
+        app:layout_constraintTop_toBottomOf="@+id/inputCelsius" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

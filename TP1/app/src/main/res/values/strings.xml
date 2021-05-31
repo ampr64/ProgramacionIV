@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TP1</string>
+    <string name="palindrome_checker">PALINDROME CHECKER</string>
+    <string name="c_to_f_converter">°C TO °F CONVERTER</string>
+    <string name="enter_your_potential_palindrome">Enter your potential palindrome!</string>
+    <string name="back_to_menu">Back to menu</string>
+</resources>
