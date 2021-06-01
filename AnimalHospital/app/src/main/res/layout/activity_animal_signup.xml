@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="1dp">
 
         <EditText
-            android:id="@+id/et_animalName"
+            android:id="@+id/animalSignup_et_animalName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -22,12 +22,12 @@
             android:maxLength="30" />
 
         <TextView
-            android:id="@+id/tv_animalName"
+            android:id="@+id/animalSignup_tv_animalName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/et_animalBreed"
+            android:id="@+id/animalSignup_et_animalBreed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/animal_signup_breed"
@@ -35,12 +35,12 @@
             android:maxLength="30" />
 
         <TextView
-            android:id="@+id/tv_animalBreed"
+            android:id="@+id/animalSignup_tv_animalBreed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/et_animalAge"
+            android:id="@+id/animalSignup_et_animalAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/animal_signup_age"
@@ -48,17 +48,17 @@
             android:maxLength="@integer/animalAgeMaxLength" />
 
         <TextView
-            android:id="@+id/tv_animalAge"
+            android:id="@+id/animalSignup_tv_animalAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Spinner
-            android:id="@+id/spn_animalType"
+            android:id="@+id/animalSignup_spn_animalType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn_signUp"
+            android:id="@+id/animalSignup_btn_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/animal_signup_signPup" />

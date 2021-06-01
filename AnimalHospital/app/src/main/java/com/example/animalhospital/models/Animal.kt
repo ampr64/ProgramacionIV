@@ -1,9 +1,16 @@
 package com.example.animalhospital.models
 
-class Animal(val name: String, val type: AnimalType, val breed: String, var age: Int) {
+import java.io.Serializable
+
+class Animal(
+    val name: String,
+    val type: AnimalType,
+    val breed: String,
+    var age: Int
+) : Serializable {
 }
 
-enum class AnimalType(private val displayName: String) {
+enum class AnimalType(private val displayName: String) : Serializable {
     CAT("Cat"),
     DOG("Dog"),
     BUNNY("Bunny");

@@ -1,19 +1,19 @@
 package com.example.animalhospital.activities
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
-import com.example.animalhospital.constants.IntentConstants
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
+import com.example.animalhospital.models.ObjectResult
 import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
 import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
 import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
 import com.example.animalhospital.textWatchers.FieldTextWatcher
 
 class AnimalSignupActivity : AppCompatActivity() {
-    private lateinit var animals: ArrayList<Animal>
     private lateinit var nameEt: EditText
     private lateinit var nameTv: TextView
     private lateinit var nameTextWatcher: FieldTextWatcher
@@ -36,26 +36,25 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun initializeFields() {
-        animals = intent.extras!!.get(IntentConstants.animalsKey) as ArrayList<Animal>
-
-        nameEt = findViewById(R.id.et_animalName)
-        nameTv = findViewById(R.id.tv_animalName)
+        nameEt = findViewById(R.id.animalSignup_et_animalName)
+        nameTv = findViewById(R.id.animalSignup_tv_animalName)
         nameTextWatcher = AnimalNameTextWatcher(nameTv)
-        breedEt = findViewById(R.id.et_animalBreed)
-        breedTv = findViewById(R.id.tv_animalBreed)
+        breedEt = findViewById(R.id.animalSignup_et_animalBreed)
+        breedTv = findViewById(R.id.animalSignup_tv_animalBreed)
         breedTextWatcher = AnimalBreedTextWatcher(breedTv)
-        ageEt = findViewById(R.id.et_animalAge)
-        ageTv = findViewById(R.id.tv_animalAge)
+        ageEt = findViewById(R.id.animalSignup_et_animalAge)
+        ageTv = findViewById(R.id.animalSignup_tv_animalAge)
         ageTextWatcher = AnimalAgeTextWatcher(ageTv)
-        animalTypeSp = findViewById(R.id.spn_animalType)
-        signUpButton = findViewById(R.id.btn_signUp)
+        animalTypeSp = findViewById(R.id.animalSignup_spn_animalType)
+        signUpButton = findViewById(R.id.animalSignup_btn_signUp)
     }
 
     private fun populateAnimalTypeSpinner() {
         val animalTypeAdapter = ArrayAdapter<AnimalType>(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            AnimalType.values())
+            AnimalType.values()
+        )
 
         animalTypeSp.adapter = animalTypeAdapter
     }
@@ -82,16 +81,20 @@ class AnimalSignupActivity : AppCompatActivity() {
 
     private fun canSubmit(): Boolean {
         return nameTextWatcher.isValidState()
-            && breedTextWatcher.isValidState()
-            && ageTextWatcher.isValidState()
+                && breedTextWatcher.isValidState()
+                && ageTextWatcher.isValidState()
     }
 
     private fun handleOnSignupClick() {
-        val newAnimal = getAnimalFromModel()
-        animals.add(newAnimal)
+        val newAnimal = getAnimalFromView()
+        val result = ObjectResult.ok(newAnimal)
+        intent?.putExtra("animal", result).also { intent ->
+            setResult(Activity.RESULT_OK, intent)
+        }
+        finish()
     }
 
-    private fun getAnimalFromModel(): Animal {
+    private fun getAnimalFromView(): Animal {
         return Animal(
             nameEt.text.toString(),
             AnimalType.getByDisplayName(animalTypeSp.selectedItem.toString()),
