@@ -31,25 +31,24 @@ class AnimalSignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_animal_signup)
 
         initializeFields()
+        populateAnimalTypeSpinner()
         setListeners()
     }
 
     private fun initializeFields() {
-        animals = intent.extras?.get(IntentConstants.animalsKey) as ArrayList<Animal>
+        animals = intent.extras!!.get(IntentConstants.animalsKey) as ArrayList<Animal>
 
-        nameEt = findViewById<EditText>(R.id.et_animalName)
-        nameTv = findViewById<TextView>(R.id.tv_animalName)
+        nameEt = findViewById(R.id.et_animalName)
+        nameTv = findViewById(R.id.tv_animalName)
         nameTextWatcher = AnimalNameTextWatcher(nameTv)
-        breedEt = findViewById<EditText>(R.id.et_animalBreed)
-        breedTv = findViewById<TextView>(R.id.tv_animalBreed)
+        breedEt = findViewById(R.id.et_animalBreed)
+        breedTv = findViewById(R.id.tv_animalBreed)
         breedTextWatcher = AnimalBreedTextWatcher(breedTv)
-        ageEt = findViewById<EditText>(R.id.et_animalAge)
-        ageTv = findViewById<TextView>(R.id.tv_animalAge)
+        ageEt = findViewById(R.id.et_animalAge)
+        ageTv = findViewById(R.id.tv_animalAge)
         ageTextWatcher = AnimalAgeTextWatcher(ageTv)
-        animalTypeSp = findViewById<Spinner>(R.id.spn_animalType)
-        signUpButton = findViewById<Button>(R.id.btn_signUp)
-
-        populateAnimalTypeSpinner()
+        animalTypeSp = findViewById(R.id.spn_animalType)
+        signUpButton = findViewById(R.id.btn_signUp)
     }
 
     private fun populateAnimalTypeSpinner() {
