@@ -1,11 +1,10 @@
 package com.example.animalhospital.utils
 
-import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
+import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.extensions.TextViewExtensions.Companion.clearText
+import com.example.animalhospital.extensions.TextViewExtensions.Companion.showNotification
 import com.example.animalhospital.models.Result
 
 class Util {
@@ -27,7 +26,7 @@ class Util {
         }
 
         fun displayMessageIfError(result: Result, outputElement: TextView) {
-            clearMessage(outputElement)
+            outputElement.clearText()
 
             if (!result.success) {
                 outputElement.text = result.error
@@ -35,71 +34,21 @@ class Util {
             }
         }
 
-        fun clearMessage(outputElement: TextView) {
-            outputElement.text = ""
-        }
-
         fun displayResultMessage(
             outputElement: TextView,
             result: Result,
-            duration: Int = 5000,
+            duration: Int = 3000,
             successMessage: String? = null
         ) {
-            val (message, bgColor) = parseResult(result, successMessage)
+            val (message, bgColor, textColor) = parseResult(result, successMessage)
 
-            outputElement.text = message
-            outputElement.setBackgroundColor(bgColor)
+            outputElement.showNotification(message, textColor, bgColor, duration)
         }
 
-        fun showNotificationFor(tv: TextView, duration: Int, textColor: Int, backgroundColor: Int) {
-            val currentBackground = (tv.background as ColorDrawable)?.color
-            val currentTextColor = tv.currentTextColor
-
-            tv.setTextColor(textColor)
-            tv.setBackgroundColor(backgroundColor)
-
-            tv.postDelayed(
-                {
-                    run {
-                        tv.visibility = View.INVISIBLE
-                        tv.setTextColor(currentTextColor)
-                        tv.setBackgroundColor(currentBackground)
-                    }
-                },
-                duration.toLong()
-            )
-        }
-
-        private fun parseResult(result: Result, successMessage: String?): Pair<String, Int> =
-            when (result.success) {
-                true -> Pair(successMessage ?: "Success!", Color.GREEN)
-                false -> Pair(result.error!!, Color.RED)
-            }
-
-        fun displayFormattedToast(
-            context: Context,
-            duration: Int,
-            result: Result,
-            successMessage: String? = null
-        ) {
-            val (message, bgColor) = parseResult(result, successMessage)
-
-            val toast = Toast.makeText(context, message, duration)
-            if (toast.view != null) {
-                toast.view!!.setBackgroundColor(bgColor)
-                toast.view!!.findViewById<TextView>(android.R.id.message).setTextColor(Color.WHITE)
-            }
-
-            toast.show()
-        }
-
-        fun hideTextViewAfter(textView: TextView, duration: Int) {
-            textView.postDelayed(
-                {
-                    run { textView.visibility = View.INVISIBLE }
-                },
-                duration.toLong()
-            )
+        private fun parseResult(result: Result, successMessage: String?)
+                : Triple<String, Int, Int> = when (result.success) {
+            true -> Triple(successMessage ?: "Success!", Constants.backgroundColorSuccess, Color.WHITE)
+            false -> Triple(result.error!!, Color.RED, Color.WHITE)
         }
     }
 }

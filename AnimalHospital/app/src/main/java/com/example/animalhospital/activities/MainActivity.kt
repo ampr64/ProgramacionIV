@@ -3,6 +3,7 @@ package com.example.animalhospital.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
@@ -14,6 +15,7 @@ import com.example.animalhospital.utils.Util
 class MainActivity : AppCompatActivity() {
     private val animals = ArrayList<Animal>()
     private lateinit var signupLauncher: ActivityResultLauncher<Intent>
+    private lateinit var resultTv: TextView
     private lateinit var signUpNavigationButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeFields() {
+        resultTv = findViewById(R.id.main_tv_result)
         signUpNavigationButton = findViewById(R.id.main_btn_signUp)
     }
 
@@ -52,6 +55,6 @@ class MainActivity : AppCompatActivity() {
             successMessage = "${newAnimal.name} has been signed up successfully!"
         }
 
-        Util.displayFormattedToast(this, 10000, signupResult, successMessage)
+        Util.displayResultMessage(resultTv, signupResult, successMessage = successMessage)
     }
 }
