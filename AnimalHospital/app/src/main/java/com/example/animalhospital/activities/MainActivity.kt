@@ -3,6 +3,7 @@ package com.example.animalhospital.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.example.animalhospital.utils.Util
 class MainActivity : AppCompatActivity() {
     private val animals = ArrayList<Animal>()
     private lateinit var signupLauncher: ActivityResultLauncher<Intent>
+    private lateinit var appointmentCalendarView: CalendarView
     private lateinit var resultTv: TextView
     private lateinit var signUpNavigationButton: Button
 
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeFields() {
+        appointmentCalendarView = findViewById(R.id.main_cv_appointmentCalendar)
         resultTv = findViewById(R.id.main_tv_result)
         signUpNavigationButton = findViewById(R.id.main_btn_signUp)
     }
