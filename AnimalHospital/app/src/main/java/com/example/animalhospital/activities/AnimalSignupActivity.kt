@@ -33,6 +33,7 @@ class AnimalSignupActivity : AppCompatActivity() {
         initializeFields()
         populateAnimalTypeSpinner()
         setListeners()
+        setSignupButtonState()
     }
 
     private fun initializeFields() {
@@ -86,15 +87,16 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun handleOnSignupClick() {
-        val newAnimal = getAnimalFromView()
+        val newAnimal = getAnimalFromForm()
         val result = ObjectResult.ok(newAnimal)
         intent?.putExtra("animal", result).also { intent ->
             setResult(Activity.RESULT_OK, intent)
         }
+
         finish()
     }
 
-    private fun getAnimalFromView(): Animal {
+    private fun getAnimalFromForm(): Animal {
         return Animal(
             nameEt.text.toString(),
             AnimalType.getByDisplayName(animalTypeSp.selectedItem.toString()),
