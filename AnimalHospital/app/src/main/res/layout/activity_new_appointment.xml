@@ -35,7 +35,7 @@
         android:layout_marginTop="50dp" />
 
     <Button
-        android:id="@+id/newAppointment_bt_createAppointment"
+        android:id="@+id/newAppointment_bt_setUpAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

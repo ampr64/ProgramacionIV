@@ -11,7 +11,6 @@ import com.example.animalhospital.R
 import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.contracts.NewAppointmentContract
 import com.example.animalhospital.contracts.SignupAnimalContract
-import com.example.animalhospital.dialogs.NewAppointmentDialog
 import com.example.animalhospital.models.*
 import com.example.animalhospital.utils.Util
 import java.util.*
@@ -60,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         appointmentCalendarView = findViewById(R.id.main_cv_appointmentCalendar)
         resultTv = findViewById(R.id.main_tv_result)
         signUpNavigationButton = findViewById(R.id.main_btn_signUp)
-        newAppointmentButton = findViewById(R.id.main_btn_newAppointment)
     }
 
     private fun setListeners() {
@@ -71,14 +69,6 @@ class MainActivity : AppCompatActivity() {
         appointmentCalendarView.setOnDateChangeListener { view, _, _, _ ->
             handleOnCalendarDateChange(view)
         }
-
-        newAppointmentButton.setOnClickListener {
-            showTimePickerDialog()
-        }
-    }
-
-    private fun showTimePickerDialog() {
-        NewAppointmentDialog().show(supportFragmentManager, "newAppointmentDialog")
     }
 
     private fun disableCalendarPastDates() {
