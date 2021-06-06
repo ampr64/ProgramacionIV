@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
+import com.example.animalhospital.adapters.AnimalTypeAdapter
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.models.ObjectResult
@@ -51,11 +52,7 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun populateAnimalTypeSpinner() {
-        val animalTypeAdapter = ArrayAdapter<AnimalType>(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            AnimalType.values()
-        )
+        val animalTypeAdapter = AnimalTypeAdapter(this)
 
         animalTypeSp.adapter = animalTypeAdapter
     }
@@ -89,8 +86,9 @@ class AnimalSignupActivity : AppCompatActivity() {
     private fun handleOnSignupClick() {
         val newAnimal = getAnimalFromForm()
         val result = ObjectResult.ok(newAnimal)
-        intent?.putExtra("animal", result).also { intent ->
-            setResult(Activity.RESULT_OK, intent)
+        intent?.let {
+            it.putExtra("animal", result)
+            setResult(Activity.RESULT_OK, it)
         }
 
         finish()

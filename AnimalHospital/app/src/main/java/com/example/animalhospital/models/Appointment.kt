@@ -1,4 +1,11 @@
 package com.example.animalhospital.models
 
-class Appointment(val animal: Animal, val reason: String) {
+import java.io.Serializable
+
+class Appointment(
+    val time: Long,
+    val animal: Animal,
+    val veterinarian: Veterinarian,
+    val reason: String
+) : Serializable {
 }

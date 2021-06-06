@@ -1,4 +1,6 @@
 package com.example.animalhospital.models
 
-class Veterinarian(val name: String, val canExamine: List<AnimalType>) {
+import java.io.Serializable
+
+class Veterinarian(val name: String, val canExamine: List<AnimalType>) : Serializable {
 }

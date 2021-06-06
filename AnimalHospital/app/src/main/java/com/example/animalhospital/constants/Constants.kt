@@ -6,6 +6,9 @@ import android.graphics.Color.rgb
 class Constants {
     companion object {
         const val animalsKey = "animals"
+        const val newAnimalKey = "newAnimal"
+        const val newAppointmentKey = "newAppointment"
+        const val veterinariansKey = "veterinarians"
         val textColorSuccess = rgb(0, 153, 51)
         val backgroundColorSuccess = Color.rgb(0, 153, 51)
         const val textColorWithBackgroundSuccess = Color.WHITE
