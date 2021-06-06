@@ -1,4 +1,4 @@
-package com.example.animalhospital.textWatchers
+package com.example.animalhospital.common
 
 import android.text.Editable
 import android.text.TextWatcher

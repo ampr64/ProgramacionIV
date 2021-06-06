@@ -12,7 +12,7 @@ import com.example.animalhospital.models.ObjectResult
 import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
 import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
 import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
-import com.example.animalhospital.textWatchers.FieldTextWatcher
+import com.example.animalhospital.common.FieldTextWatcher
 
 class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText
