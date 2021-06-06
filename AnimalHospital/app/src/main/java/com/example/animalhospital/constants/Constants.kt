@@ -7,6 +7,7 @@ class Constants {
     companion object {
         const val animalsKey = "animals"
         const val newAnimalKey = "newAnimal"
+        const val appointmentsKey = "appointments"
         const val newAppointmentKey = "newAppointment"
         const val veterinariansKey = "veterinarians"
         val textColorSuccess = rgb(0, 153, 51)
