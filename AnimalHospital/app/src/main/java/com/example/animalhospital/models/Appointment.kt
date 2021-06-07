@@ -3,7 +3,7 @@ package com.example.animalhospital.models
 import java.io.Serializable
 
 class Appointment(
-    val time: Long,
+    val hour: Int,
     val day: Int,
     val month: Int,
     val year: Int,

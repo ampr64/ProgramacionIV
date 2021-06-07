@@ -10,5 +10,6 @@
     <string name="animal_signup_signPup">Sign (p)up</string>
 
     <string name="new_appointment_set_up_appointment">Set up appointment</string>
+    <string name="new_appointment_reason_hint">Reason for the appointment</string>
 
 </resources>

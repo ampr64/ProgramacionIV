@@ -15,11 +15,34 @@
         app:layout_constraintRight_toRightOf="parent"
         android:timePickerMode="spinner" />
 
+    <EditText
+        android:id="@+id/newAppointment_et_appointmentReason"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/newAppointment_tp_appointmentTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/newAppointment_tv_appointmentReasonError"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:inputType="text"
+        android:hint="@string/new_appointment_reason_hint"
+        android:maxLength="100" />
+
+    <TextView
+        android:id="@+id/newAppointment_tv_appointmentReasonError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/newAppointment_et_appointmentReason"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="50dp"/>
+
     <Spinner
         android:id="@+id/newAppointment_sp_animalList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/newAppointment_tp_appointmentTime"
+        android:layout_height="45dp"
+        app:layout_constraintTop_toBottomOf="@id/newAppointment_tv_appointmentReasonError"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/newAppointment_sp_veterinarianList"
         android:layout_marginRight="10dp"
@@ -28,8 +51,8 @@
     <Spinner
         android:id="@+id/newAppointment_sp_veterinarianList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/newAppointment_tp_appointmentTime"
+        android:layout_height="45dp"
+        app:layout_constraintTop_toBottomOf="@id/newAppointment_tv_appointmentReasonError"
         app:layout_constraintLeft_toRightOf="@id/newAppointment_sp_animalList"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="50dp" />
@@ -38,7 +61,7 @@
         android:id="@+id/newAppointment_bt_setUpAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newAppointment_sp_veterinarianList"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

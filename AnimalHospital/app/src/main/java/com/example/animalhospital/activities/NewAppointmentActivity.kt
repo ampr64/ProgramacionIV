@@ -1,31 +1,31 @@
 package com.example.animalhospital.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.TimePicker
+import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalAdapter
 import com.example.animalhospital.adapters.VeterinarianAdapter
 import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.Appointment
+import com.example.animalhospital.models.ObjectResult
 import com.example.animalhospital.models.Veterinarian
-import kotlin.collections.ArrayList
 
 class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private lateinit var animals: ArrayList<Animal>
     private lateinit var appointments: ArrayList<Appointment>
     private lateinit var veterinarians: ArrayList<Veterinarian>
     private var selectedAnimal: Animal? = null
+    private var selectedVeterinarian: Veterinarian? = null
     private var selectedDay: Int? = null
     private var selectedMonth: Int? = null
     private var selectedYear: Int? = null
-    private lateinit var appointmentTime: TimePicker
+    private lateinit var appointmentTp: TimePicker
+    private lateinit var reasonEt: EditText
     private lateinit var animalSp: Spinner
     private lateinit var veterinarianSp: Spinner
     private lateinit var setUpAppointmentButton: Button
@@ -36,11 +36,35 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
 
         initializeFields()
 
+        appointmentTp.setIs24HourView(true)
+
         animalSp.onItemSelectedListener = this
+        veterinarianSp.onItemSelectedListener = this
+        setUpAppointmentButton.setOnClickListener {
+            handleOnSetAppointmentClick()
+        }
+    }
+
+    private fun handleOnSetAppointmentClick() {
+        val newAppointment = getAppointmentFromView()
+        val result = ObjectResult.ok(newAppointment)
+        intent?.let {
+            it.putExtra("animal", result)
+            setResult(Activity.RESULT_OK, it)
+        }
+
+        finish()
+    }
+
+    private fun getAppointmentFromView(): Appointment {
+        val hour = appointmentTp.hour
+
+        return Appointment(hour, selectedDay!!, selectedMonth!!, selectedYear!!, selectedAnimal!!, selectedVeterinarian!!, reasonEt.toString())
     }
 
     private fun initializeFields() {
-        appointmentTime = findViewById(R.id.newAppointment_tp_appointmentTime)
+        appointmentTp = findViewById(R.id.newAppointment_tp_appointmentTime)
+        reasonEt = findViewById(R.id.newAppointment_et_appointmentReason)
         animalSp = findViewById(R.id.newAppointment_sp_animalList)
         veterinarianSp = findViewById(R.id.newAppointment_sp_veterinarianList)
         setUpAppointmentButton = findViewById(R.id.newAppointment_bt_setUpAppointment)

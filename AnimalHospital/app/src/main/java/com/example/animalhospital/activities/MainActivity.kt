@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appointmentCalendarView: CalendarView
     private lateinit var resultTv: TextView
     private lateinit var signUpNavigationButton: Button
-    private lateinit var newAppointmentButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
