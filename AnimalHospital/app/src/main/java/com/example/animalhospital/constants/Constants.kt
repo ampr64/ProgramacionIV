@@ -9,6 +9,7 @@ class Constants {
         const val newAnimalKey = "newAnimal"
         const val appointmentsKey = "appointments"
         const val newAppointmentKey = "newAppointment"
+        const val newExaminationKey = "newExamination"
         const val veterinariansKey = "veterinarians"
         val textColorSuccess = rgb(0, 153, 51)
         val backgroundColorSuccess = Color.rgb(0, 153, 51)

@@ -14,6 +14,9 @@ import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.Appointment
 import com.example.animalhospital.models.ObjectResult
 import com.example.animalhospital.models.Veterinarian
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 
 class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private lateinit var animals: ArrayList<Animal>
@@ -21,9 +24,7 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private lateinit var veterinarians: ArrayList<Veterinarian>
     private var selectedAnimal: Animal? = null
     private var selectedVeterinarian: Veterinarian? = null
-    private var selectedDay: Int? = null
-    private var selectedMonth: Int? = null
-    private var selectedYear: Int? = null
+    private var selectedDate: LocalDate? = null
     private lateinit var appointmentTp: TimePicker
     private lateinit var reasonEt: EditText
     private lateinit var animalSp: Spinner
@@ -40,6 +41,8 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
 
         animalSp.onItemSelectedListener = this
         veterinarianSp.onItemSelectedListener = this
+
+        setUpAppointmentButton.isEnabled = canSetUpNewAppointment()
         setUpAppointmentButton.setOnClickListener {
             handleOnSetAppointmentClick()
         }
@@ -58,16 +61,18 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     private fun getAppointmentFromView(): Appointment {
-        val hour = appointmentTp.hour
-
         return Appointment(
-            hour,
-            selectedDay!!,
-            selectedMonth!!,
-            selectedYear!!,
+            getDateTime(),
             selectedAnimal!!,
             selectedVeterinarian!!,
             reasonEt.text.toString()
+        )
+    }
+
+    private fun getDateTime(): LocalDateTime {
+        return LocalDateTime.of(
+            selectedDate,
+            LocalTime.of(appointmentTp.hour, appointmentTp.minute)
         )
     }
 
@@ -78,14 +83,14 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         veterinarianSp = findViewById(R.id.newAppointment_sp_veterinarianList)
         setUpAppointmentButton = findViewById(R.id.newAppointment_bt_setUpAppointment)
 
-        intent.extras?.let {
-            animals = it.get(Constants.animalsKey) as ArrayList<Animal>
-            appointments = it.get(Constants.appointmentsKey) as ArrayList<Appointment>
-            veterinarians = it.get(Constants.veterinariansKey) as ArrayList<Veterinarian>
-            val (selectedYear, selectedMonth, selectedDay) = it.get("selectedDate") as Triple<Int, Int, Int>
-            this.selectedYear = selectedYear
-            this.selectedMonth = selectedMonth
-            this.selectedDay = selectedDay
+        intent.extras?.apply {
+            animals = get(Constants.animalsKey) as ArrayList<Animal>
+            appointments = get(Constants.appointmentsKey) as ArrayList<Appointment>
+            veterinarians = get(Constants.veterinariansKey) as ArrayList<Veterinarian>
+
+            val (year, month, day) = get("selectedDate") as Triple<Int, Int, Int>
+            selectedDate = LocalDate.of(year, month, day)
+
             populateAnimalSpinner()
         }
     }
@@ -94,37 +99,22 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         animalSp.adapter = AnimalAdapter(this, animals)
     }
 
-    private fun hasDailyLimitRemaining(veterinarian: Veterinarian): Boolean {
-        return veterinarian.hasDailyLimit()
-                && getTodayAppointmentCount(veterinarian) < veterinarian.dailyLimit!!
-    }
-
-    private fun getTodayAppointmentCount(veterinarian: Veterinarian): Int {
-        return appointments.count { a ->
-            a.day == selectedDay
-                    && a.month == selectedMonth
-                    && a.year == selectedYear
-        }
-    }
-
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when (parent?.id) {
-            animalSp.id -> handleOnAnimalSelected(position)
-            veterinarianSp.id -> handleOnVeterinarianSelected(position)
+        if (position > 0) {
+            when (parent?.id) {
+                animalSp.id -> handleOnAnimalSelected(position)
+                veterinarianSp.id -> handleOnVeterinarianSelected(position)
+            }
         }
     }
 
     private fun handleOnAnimalSelected(position: Int) {
-        if (position != 0) {
-            selectedAnimal = animals[position - 1]
-            populateVeterinarianSpinner()
-        }
+        selectedAnimal = animals[position - 1]
+        populateVeterinarianSpinner()
     }
 
     private fun handleOnVeterinarianSelected(position: Int) {
-        if (position != 0) {
-            selectedVeterinarian = veterinarians[position - 1]
-        }
+        selectedVeterinarian = veterinarians[position - 1]
     }
 
     private fun populateVeterinarianSpinner() {
@@ -135,6 +125,31 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         veterinarianSp.adapter = VeterinarianAdapter(this, filteredVets)
     }
 
+    private fun hasDailyLimitRemaining(veterinarian: Veterinarian): Boolean {
+        return !veterinarian.hasDailyLimit()
+                || getVetDateAppointmentCount(veterinarian) < veterinarian.dailyLimit!!
+    }
+
+    private fun getVetDateAppointmentCount(veterinarian: Veterinarian): Int {
+        return appointments.count { a ->
+            a.veterinarian == veterinarian && a.dateTime.toLocalDate().equals(selectedDate)
+        }
+    }
+
+    private fun canSetUpNewAppointment(): Boolean {
+        return getDateTotalAppointmentCount() < maxDailyAppointments
+    }
+
+    private fun getDateTotalAppointmentCount(): Int {
+        return appointments.count { a ->
+            a.dateTime.toLocalDate().equals(selectedDate)
+        }
+    }
+
     override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    companion object {
+        const val maxDailyAppointments = 5
     }
 }

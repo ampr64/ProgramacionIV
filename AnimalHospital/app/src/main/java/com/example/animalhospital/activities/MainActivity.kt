@@ -24,9 +24,9 @@ class MainActivity : AppCompatActivity() {
     )
     private val appointments = ArrayList<Appointment>()
     private val examinations = ArrayList<Examination>()
-    private val veterinarians = arrayListOf<Veterinarian>(
-        Veterinarian("Peter", listOf(AnimalType.DOG), 3),
-        Veterinarian("John", listOf(AnimalType.BUNNY, AnimalType.CAT), 2)
+    private val veterinarians = arrayListOf(
+        Veterinarian("Peter", arrayListOf(AnimalType.DOG), 3),
+        Veterinarian("John", arrayListOf(AnimalType.BUNNY, AnimalType.CAT), 2)
     )
     private lateinit var signupLauncher: ActivityResultLauncher<Intent>
     private lateinit var newAppointmentLauncher: ActivityResultLauncher<Intent>
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleOnCalendarDateChange(year: Int, month: Int, dayOfMonth: Int) {
         Intent(applicationContext, NewAppointmentActivity::class.java).apply {
-            putExtra("selectedDate", Triple(year, month, dayOfMonth))
+            putExtra("selectedDate", Triple(year, month + 1, dayOfMonth))
             putExtra(Constants.animalsKey, animals)
             putExtra(Constants.appointmentsKey, appointments)
             putExtra(Constants.veterinariansKey, veterinarians)

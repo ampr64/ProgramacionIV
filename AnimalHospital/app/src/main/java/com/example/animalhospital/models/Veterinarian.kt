@@ -4,11 +4,11 @@ import java.io.Serializable
 
 class Veterinarian(
     val name: String,
-    val permittedAnimalTypes: List<AnimalType>,
+    val permittedAnimalTypes: ArrayList<AnimalType>,
     val dailyLimit: Int? = null
 ) : Serializable {
     fun canExamine(animal: Animal): Boolean {
-        return permittedAnimalTypes.contains(animal.type)
+        return animal.type in permittedAnimalTypes
     }
 
     fun hasDailyLimit(): Boolean {

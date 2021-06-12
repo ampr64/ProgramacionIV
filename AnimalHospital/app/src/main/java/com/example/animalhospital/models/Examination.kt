@@ -4,7 +4,9 @@ import java.io.Serializable
 
 class Examination(
     val diagnosis: String,
+    val appointment: Appointment,
     val medicine: String? = null,
     val treatment: String? = null,
-    val restDays: Int = 0) : Serializable {
+    val restDays: Int = 0
+) : Serializable {
 }

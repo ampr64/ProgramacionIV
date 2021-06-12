@@ -15,7 +15,7 @@ class NewExaminationContract : ActivityResultContract<Intent, ObjectResult<Exami
 
     override fun parseResult(resultCode: Int, intent: Intent?): ObjectResult<Examination?> =
         when (resultCode) {
-            Activity.RESULT_OK -> intent?.getSerializableExtra(Constants.newAppointmentKey) as ObjectResult<Examination?>
+            Activity.RESULT_OK -> intent?.getSerializableExtra(Constants.newExaminationKey) as ObjectResult<Examination?>
             else -> ObjectResult.fail("Examination couldn't be created.")
         }
 }
