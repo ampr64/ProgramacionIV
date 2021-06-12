@@ -15,7 +15,7 @@ class NewAppointmentContract : ActivityResultContract<Intent, ObjectResult<Appoi
 
     override fun parseResult(resultCode: Int, intent: Intent?): ObjectResult<Appointment?> =
         when (resultCode) {
-            Activity.RESULT_OK -> intent?.getSerializableExtra(Constants.newAppointmentKey) as ObjectResult<Appointment?>
+            Activity.RESULT_OK -> intent?.getSerializableExtra(Constants.KEY_NEW_APPOINTMENT) as ObjectResult<Appointment?>
             else -> ObjectResult.fail("Appointment couldn't be created.")
         }
 }

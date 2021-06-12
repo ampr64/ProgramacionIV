@@ -2,17 +2,21 @@ package com.example.animalhospital.activities
 
 import android.app.Activity
 import android.os.Bundle
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalTypeAdapter
+import com.example.animalhospital.common.FieldTextWatcher
+import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.models.ObjectResult
 import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
 import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
 import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
-import com.example.animalhospital.common.FieldTextWatcher
 
 class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText
@@ -87,7 +91,7 @@ class AnimalSignupActivity : AppCompatActivity() {
         val newAnimal = getAnimalFromForm()
         val result = ObjectResult.ok(newAnimal)
         intent?.let {
-            it.putExtra("animal", result)
+            it.putExtra(Constants.KEY_NEW_ANIMAL, result)
             setResult(Activity.RESULT_OK, it)
         }
 

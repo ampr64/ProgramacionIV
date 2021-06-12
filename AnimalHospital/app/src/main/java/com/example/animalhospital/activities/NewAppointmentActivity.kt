@@ -36,25 +36,60 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         setContentView(R.layout.activity_new_appointment)
 
         initializeFields()
+        setListeners()
 
         appointmentTp.setIs24HourView(true)
 
+        setSetUpAppointmentButtonState()
+    }
+
+    private fun initializeFields() {
+        appointmentTp = findViewById(R.id.newAppointment_tp_appointmentTime)
+        reasonEt = findViewById(R.id.newAppointment_et_appointmentReason)
+        animalSp = findViewById(R.id.newAppointment_sp_animalList)
+        veterinarianSp = findViewById(R.id.newAppointment_sp_veterinarianList)
+        setUpAppointmentButton = findViewById(R.id.newAppointment_bt_setUpAppointment)
+
+        intent.extras?.apply {
+            animals = get(Constants.KEY_ANIMALS) as ArrayList<Animal>
+            populateAnimalSpinner()
+
+            appointments = get(Constants.KEY_APPOINTMENTS) as ArrayList<Appointment>
+            veterinarians = get(Constants.KEY_VETERINARIANS) as ArrayList<Veterinarian>
+
+            val (year, month, day) = get(Constants.KEY_APPOINTMENT_DATE) as Triple<Int, Int, Int>
+            selectedDate = LocalDate.of(year, month, day)
+        }
+    }
+
+    private fun setListeners() {
         animalSp.onItemSelectedListener = this
         veterinarianSp.onItemSelectedListener = this
 
-        setUpAppointmentButton.isEnabled = canSetUpNewAppointment()
         setUpAppointmentButton.setOnClickListener {
             handleOnSetAppointmentClick()
         }
+    }
+
+    private fun setSetUpAppointmentButtonState() {
+        setUpAppointmentButton.isEnabled = canSetUpNewAppointment()
+    }
+
+    private fun canSetUpNewAppointment(): Boolean {
+        return getDateTotalAppointmentCount() < MAX_DAILY_APPOINTMENTS
+    }
+
+    private fun populateAnimalSpinner() {
+        animalSp.adapter = AnimalAdapter(this, animals)
     }
 
     private fun handleOnSetAppointmentClick() {
         val newAppointment = getAppointmentFromView()
         val result = ObjectResult.ok(newAppointment)
 
-        intent?.let {
-            it.putExtra(Constants.newAppointmentKey, result)
-            setResult(Activity.RESULT_OK, it)
+        intent?.apply {
+            putExtra(Constants.KEY_NEW_APPOINTMENT, result)
+            setResult(Activity.RESULT_OK, this)
         }
 
         finish()
@@ -74,29 +109,6 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
             selectedDate,
             LocalTime.of(appointmentTp.hour, appointmentTp.minute)
         )
-    }
-
-    private fun initializeFields() {
-        appointmentTp = findViewById(R.id.newAppointment_tp_appointmentTime)
-        reasonEt = findViewById(R.id.newAppointment_et_appointmentReason)
-        animalSp = findViewById(R.id.newAppointment_sp_animalList)
-        veterinarianSp = findViewById(R.id.newAppointment_sp_veterinarianList)
-        setUpAppointmentButton = findViewById(R.id.newAppointment_bt_setUpAppointment)
-
-        intent.extras?.apply {
-            animals = get(Constants.animalsKey) as ArrayList<Animal>
-            appointments = get(Constants.appointmentsKey) as ArrayList<Appointment>
-            veterinarians = get(Constants.veterinariansKey) as ArrayList<Veterinarian>
-
-            val (year, month, day) = get("selectedDate") as Triple<Int, Int, Int>
-            selectedDate = LocalDate.of(year, month, day)
-
-            populateAnimalSpinner()
-        }
-    }
-
-    private fun populateAnimalSpinner() {
-        animalSp.adapter = AnimalAdapter(this, animals)
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -136,10 +148,6 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         }
     }
 
-    private fun canSetUpNewAppointment(): Boolean {
-        return getDateTotalAppointmentCount() < maxDailyAppointments
-    }
-
     private fun getDateTotalAppointmentCount(): Int {
         return appointments.count { a ->
             a.dateTime.toLocalDate().equals(selectedDate)
@@ -150,6 +158,6 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     companion object {
-        const val maxDailyAppointments = 5
+        private const val MAX_DAILY_APPOINTMENTS = 5
     }
 }

@@ -32,41 +32,14 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         setContentView(R.layout.activity_new_examination)
 
         initializeFields()
+        setListeners()
 
-        appointmentSp.onItemSelectedListener = this
-
-        saveButton.setOnClickListener {
-            handleOnSaveButtonClick()
-        }
-    }
-
-    private fun handleOnSaveButtonClick() {
-        val newExamination = getExaminationFromView()
-        val result = ObjectResult.ok(newExamination)
-
-        intent?.apply {
-            putExtra(Constants.newExaminationKey, result)
-            setResult(Activity.RESULT_OK, this)
-        }
-
-        finish()
-    }
-
-    private fun getExaminationFromView(): Examination {
-        val restDays = if (restDaysEt.text.isBlank()) 0 else restDaysEt.text.toString().toInt()
-
-        return Examination(
-            diagnosisEt.text.toString(),
-            selectedAppointment!!,
-            medicineEt.text.toString(),
-            treatmentEt.text.toString(),
-            restDays
-        )
+        setSaveButtonState()
     }
 
     private fun initializeFields() {
         intent.extras?.apply {
-            appointments = get(Constants.appointmentsKey) as ArrayList<Appointment>
+            appointments = get(Constants.KEY_APPOINTMENTS) as ArrayList<Appointment>
             appointmentSp = findViewById(R.id.newExamination_sp_appointment)
 
             populateAppointmentSpinner()
@@ -83,10 +56,46 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         saveButton = findViewById(R.id.newExamination_bt_save)
     }
 
+    private fun setListeners() {
+        appointmentSp.onItemSelectedListener = this
+
+        saveButton.setOnClickListener {
+            handleOnSaveButtonClick()
+        }
+    }
+
+    private fun setSaveButtonState() {
+        saveButton.isEnabled = true
+    }
+
     private fun populateAppointmentSpinner() {
         getAppointments().also {
             appointmentSp.adapter = AppointmentAdapter(this, it)
         }
+    }
+
+    private fun handleOnSaveButtonClick() {
+        val newExamination = getExaminationFromView()
+        val result = ObjectResult.ok(newExamination)
+
+        intent?.apply {
+            putExtra(Constants.KEY_NEW_EXAMINATION, result)
+            setResult(Activity.RESULT_OK, this)
+        }
+
+        finish()
+    }
+
+    private fun getExaminationFromView(): Examination {
+        val restDays = if (restDaysEt.text.isBlank()) 0 else restDaysEt.text.toString().toInt()
+
+        return Examination(
+            diagnosisEt.text.toString(),
+            selectedAppointment!!,
+            medicineEt.text.toString(),
+            treatmentEt.text.toString(),
+            restDays
+        )
     }
 
     private fun getAppointments(): ArrayList<Appointment> {

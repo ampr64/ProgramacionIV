@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleOnNewExaminationClick() {
         Intent(this, NewExaminationActivity::class.java).let {
-            it.putExtra(Constants.appointmentsKey, appointments)
+            it.putExtra(Constants.KEY_APPOINTMENTS, appointments)
 
             newExaminationLauncher.launch(it)
         }
@@ -126,10 +126,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleOnCalendarDateChange(year: Int, month: Int, dayOfMonth: Int) {
         Intent(applicationContext, NewAppointmentActivity::class.java).apply {
-            putExtra("selectedDate", Triple(year, month + 1, dayOfMonth))
-            putExtra(Constants.animalsKey, animals)
-            putExtra(Constants.appointmentsKey, appointments)
-            putExtra(Constants.veterinariansKey, veterinarians)
+            putExtra(Constants.KEY_APPOINTMENT_DATE, Triple(year, month + 1, dayOfMonth))
+            putExtra(Constants.KEY_ANIMALS, animals)
+            putExtra(Constants.KEY_APPOINTMENTS, appointments)
+            putExtra(Constants.KEY_VETERINARIANS, veterinarians)
 
             newAppointmentLauncher.launch(this)
         }

@@ -5,12 +5,14 @@ import android.graphics.Color.rgb
 
 class Constants {
     companion object {
-        const val animalsKey = "animals"
-        const val newAnimalKey = "newAnimal"
-        const val appointmentsKey = "appointments"
-        const val newAppointmentKey = "newAppointment"
-        const val newExaminationKey = "newExamination"
-        const val veterinariansKey = "veterinarians"
+        const val KEY_ANIMALS = "animals"
+        const val KEY_NEW_ANIMAL = "newAnimal"
+        const val KEY_APPOINTMENTS = "appointments"
+        const val KEY_NEW_APPOINTMENT = "newAppointment"
+        const val KEY_APPOINTMENT_DATE = "appointmentDate"
+        const val KEY_EXAMINATIONS = "examinations"
+        const val KEY_NEW_EXAMINATION = "newExamination"
+        const val KEY_VETERINARIANS = "veterinarians"
         val textColorSuccess = rgb(0, 153, 51)
         val backgroundColorSuccess = Color.rgb(0, 153, 51)
         const val textColorWithBackgroundSuccess = Color.WHITE
