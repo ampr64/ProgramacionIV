@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.contracts.NewAppointmentContract
+import com.example.animalhospital.contracts.NewExaminationContract
 import com.example.animalhospital.contracts.SignupAnimalContract
 import com.example.animalhospital.models.*
 import com.example.animalhospital.utils.Util
@@ -29,9 +30,11 @@ class MainActivity : AppCompatActivity() {
     )
     private lateinit var signupLauncher: ActivityResultLauncher<Intent>
     private lateinit var newAppointmentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var newExaminationLauncher: ActivityResultLauncher<Intent>
     private lateinit var appointmentCalendarView: CalendarView
     private lateinit var resultTv: TextView
     private lateinit var signUpNavigationButton: Button
+    private lateinit var newExaminationButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,17 +55,28 @@ class MainActivity : AppCompatActivity() {
         ) { result ->
             handleOnNewAppointmentResult(result)
         }
+
+        newExaminationLauncher = registerForActivityResult(
+            NewExaminationContract()
+        ) { result ->
+            handleOnNewExaminationResult(result)
+        }
     }
 
     private fun initializeFields() {
         appointmentCalendarView = findViewById(R.id.main_cv_appointmentCalendar)
         resultTv = findViewById(R.id.main_tv_result)
         signUpNavigationButton = findViewById(R.id.main_btn_signUp)
+        newExaminationButton = findViewById(R.id.main_btn_newExamination)
     }
 
     private fun setListeners() {
         signUpNavigationButton.setOnClickListener {
             handleOnAnimalSignupClick()
+        }
+
+        newExaminationButton.setOnClickListener {
+            handleOnNewExaminationClick()
         }
 
         appointmentCalendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -83,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleOnSignupResult(result: ObjectResult<Animal?>) {
         var successMessage: String? = null
         if (result.success) {
-            (result.obj as Animal).also {
+            (result.obj)?.also {
                 animals.add(it)
                 successMessage = "${it.name} has been signed up successfully!"
             }
@@ -92,20 +106,38 @@ class MainActivity : AppCompatActivity() {
         Util.displayResultMessage(resultTv, result, successMessage = successMessage)
     }
 
-    private fun handleOnCalendarDateChange(year: Int, month: Int, dayOfMonth: Int) {
+    private fun handleOnNewExaminationClick() {
+        Intent(this, NewExaminationActivity::class.java).let {
+            it.putExtra(Constants.appointmentsKey, appointments)
 
+            newExaminationLauncher.launch(it)
+        }
+    }
+
+    private fun handleOnNewExaminationResult(result: ObjectResult<Examination?>) {
+        if (result.success) {
+            (result.obj)?.also {
+                examinations.add(it)
+            }
+        }
+
+        Util.displayResultMessage(resultTv, result)
+    }
+
+    private fun handleOnCalendarDateChange(year: Int, month: Int, dayOfMonth: Int) {
         Intent(applicationContext, NewAppointmentActivity::class.java).apply {
             putExtra("selectedDate", Triple(year, month, dayOfMonth))
             putExtra(Constants.animalsKey, animals)
             putExtra(Constants.appointmentsKey, appointments)
             putExtra(Constants.veterinariansKey, veterinarians)
+
             newAppointmentLauncher.launch(this)
         }
     }
 
     private fun handleOnNewAppointmentResult(result: ObjectResult<Appointment?>) {
         if (result.success) {
-            (result.obj as Appointment).also {
+            (result.obj)?.also {
                 appointments.add(it)
             }
         }

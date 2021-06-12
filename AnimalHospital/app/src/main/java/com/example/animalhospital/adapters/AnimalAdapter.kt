@@ -7,6 +7,7 @@ import com.example.animalhospital.models.Animal
 class AnimalAdapter(context: Context, animalList: ArrayList<Animal>) :
     HintAdapter(
         context,
-        animalList.map { animal -> animal.name }, "Select an animal"
+        animalList.map { animal -> animal.name },
+        "Select an animal"
     ) {
 }

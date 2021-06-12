@@ -12,4 +12,10 @@
     <string name="new_appointment_set_up_appointment">Set up appointment</string>
     <string name="new_appointment_reason_hint">Reason for the appointment</string>
 
+    <string name="new_examination_diagnosis">Diagnosis</string>
+    <string name="new_examination_medicine">Medicine</string>
+    <string name="new_examination_treatment">Treatment</string>
+    <string name="new_examination_rest_days">Days of rest</string>
+    <string name="new_examination_save">Save</string>
+
 </resources>

@@ -48,8 +48,9 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private fun handleOnSetAppointmentClick() {
         val newAppointment = getAppointmentFromView()
         val result = ObjectResult.ok(newAppointment)
+
         intent?.let {
-            it.putExtra("animal", result)
+            it.putExtra(Constants.newAppointmentKey, result)
             setResult(Activity.RESULT_OK, it)
         }
 
@@ -59,7 +60,15 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private fun getAppointmentFromView(): Appointment {
         val hour = appointmentTp.hour
 
-        return Appointment(hour, selectedDay!!, selectedMonth!!, selectedYear!!, selectedAnimal!!, selectedVeterinarian!!, reasonEt.toString())
+        return Appointment(
+            hour,
+            selectedDay!!,
+            selectedMonth!!,
+            selectedYear!!,
+            selectedAnimal!!,
+            selectedVeterinarian!!,
+            reasonEt.text.toString()
+        )
     }
 
     private fun initializeFields() {
@@ -78,7 +87,7 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
             this.selectedMonth = selectedMonth
             this.selectedDay = selectedDay
             populateAnimalSpinner()
-        } ?: return
+        }
     }
 
     private fun populateAnimalSpinner() {
@@ -99,14 +108,23 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if (position != 0) {
-            selectedAnimal = animals[position - 1]
-            handleOnSelectedAnimalChanged()
+        when (parent?.id) {
+            animalSp.id -> handleOnAnimalSelected(position)
+            veterinarianSp.id -> handleOnVeterinarianSelected(position)
         }
     }
 
-    private fun handleOnSelectedAnimalChanged() {
-        populateVeterinarianSpinner()
+    private fun handleOnAnimalSelected(position: Int) {
+        if (position != 0) {
+            selectedAnimal = animals[position - 1]
+            populateVeterinarianSpinner()
+        }
+    }
+
+    private fun handleOnVeterinarianSelected(position: Int) {
+        if (position != 0) {
+            selectedVeterinarian = veterinarians[position - 1]
+        }
     }
 
     private fun populateVeterinarianSpinner() {

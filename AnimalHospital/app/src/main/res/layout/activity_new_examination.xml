@@ -1,68 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.NewExaminationActivity">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+    <Spinner
+        android:id="@+id/newExamination_sp_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_et_diagnosis"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/animalSignup_et_animalName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/animal_signup_pup_name"
-            android:inputType="textPersonName"
-            android:maxLength="30" />
+    <EditText
+        android:id="@+id/newExamination_et_diagnosis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_examination_diagnosis"
+        android:inputType="text"
+        android:maxLength="30"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_tv_diagnosis"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_sp_appointment" />
 
-        <TextView
-            android:id="@+id/animalSignup_tv_animalName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/newExamination_tv_diagnosis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_et_medicine"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_et_diagnosis" />
 
-        <EditText
-            android:id="@+id/animalSignup_et_animalBreed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/animal_signup_breed"
-            android:inputType="text"
-            android:maxLength="30" />
+    <EditText
+        android:id="@+id/newExamination_et_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_examination_medicine"
+        android:inputType="text"
+        android:maxLength="30"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_tv_medicine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_tv_diagnosis" />
 
-        <TextView
-            android:id="@+id/animalSignup_tv_animalBreed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/newExamination_tv_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_et_treatment"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_et_medicine" />
 
-        <EditText
-            android:id="@+id/animalSignup_et_animalAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/animal_signup_age"
-            android:inputType="number"
-            android:maxLength="@integer/animalAgeMaxLength" />
+    <EditText
+        android:id="@+id/newExamination_et_treatment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_examination_treatment"
+        android:inputType="text"
+        android:maxLength="30"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_tv_treatment"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_tv_medicine" />
 
-        <TextView
-            android:id="@+id/animalSignup_tv_animalAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/newExamination_tv_treatment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_et_rest_days"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_et_treatment" />
 
-        <Spinner
-            android:id="@+id/animalSignup_spn_animalType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/newExamination_et_rest_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_examination_rest_days"
+        android:inputType="number"
+        android:maxLength="@integer/animalAgeMaxLength"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_tv_rest_days"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_tv_treatment" />
 
-        <Button
-            android:id="@+id/animalSignup_btn_signUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_signup_signPup" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/newExamination_tv_rest_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/newExamination_bt_save"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_et_rest_days" />
+
+    <Button
+        android:id="@+id/newExamination_bt_save"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/new_examination_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newExamination_tv_rest_days" />
 </androidx.constraintlayout.widget.ConstraintLayout>

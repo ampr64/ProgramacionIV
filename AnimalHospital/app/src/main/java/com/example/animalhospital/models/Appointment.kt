@@ -11,4 +11,5 @@ class Appointment(
     val veterinarian: Veterinarian,
     val reason: String
 ) : Serializable {
+    var isExaminationPending = true
 }
