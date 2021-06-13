@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalTypeAdapter
-import com.example.animalhospital.common.FieldTextWatcher
+import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
@@ -21,13 +21,13 @@ import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
 class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText
     private lateinit var nameTv: TextView
-    private lateinit var nameTextWatcher: FieldTextWatcher
+    private lateinit var nameTextWatcher: StatefulTextWatcher
     private lateinit var breedEt: EditText
     private lateinit var breedTv: TextView
-    private lateinit var breedTextWatcher: FieldTextWatcher
+    private lateinit var breedTextWatcher: StatefulTextWatcher
     private lateinit var ageEt: EditText
     private lateinit var ageTv: TextView
-    private lateinit var ageTextWatcher: FieldTextWatcher
+    private lateinit var ageTextWatcher: StatefulTextWatcher
     private lateinit var animalTypeSp: Spinner
     private lateinit var signUpButton: Button
 

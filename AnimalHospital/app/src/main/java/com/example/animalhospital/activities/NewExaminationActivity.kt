@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AppointmentAdapter
 import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.validateNotBlank
 import com.example.animalhospital.models.Appointment
 import com.example.animalhospital.models.Examination
 import com.example.animalhospital.models.ObjectResult
@@ -33,6 +34,8 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
         initializeFields()
         setListeners()
+
+        diagnosisEt.validateNotBlank("Diagnosis")
 
         setSaveButtonState()
     }
