@@ -9,20 +9,25 @@ import com.example.animalhospital.models.Result
 
 class Util {
     companion object {
-        fun emptyFieldTextMessage(fieldName: String): String {
-            return "$fieldName cannot be empty"
+        private const val DEFAULT_FIELD_NAME = "Field"
+
+        private fun fieldNameOrDefault(fieldName: String?): String =
+            if (fieldName.isNullOrEmpty()) DEFAULT_FIELD_NAME else fieldName
+
+        fun emptyFieldTextMessage(fieldName: String? = null): String {
+            return "${fieldNameOrDefault(fieldName)} cannot be empty"
         }
 
-        fun minLengthMessage(fieldName: String, minLength: Int): String {
-            return "$fieldName must be at least $minLength characters long"
+        fun minLengthMessage(fieldName: String?, minLength: Int): String {
+            return "${fieldNameOrDefault(fieldName)} must be at least $minLength characters long"
         }
 
-        fun maxLengthMessage(fieldName: String, maxLength: Int): String {
-            return "$fieldName must be at least $maxLength characters long"
+        fun maxLengthMessage(fieldName: String?, maxLength: Int): String {
+            return "${fieldNameOrDefault(fieldName)} must be at least $maxLength characters long"
         }
 
-        fun mustBeInRangeMessage(fieldName: String, minValue: Int, maxValue: Int): String {
-            return "$fieldName must be between $minValue and $maxValue"
+        fun mustBeInRangeMessage(fieldName: String?, minValue: Int, maxValue: Int): String {
+            return "${fieldNameOrDefault(fieldName)} must be between $minValue and $maxValue"
         }
 
         fun displayMessageIfError(result: Result, outputElement: TextView) {
@@ -47,7 +52,11 @@ class Util {
 
         private fun parseResult(result: Result, successMessage: String?)
                 : Triple<String, Int, Int> = when (result.success) {
-            true -> Triple(successMessage ?: "Success!", Constants.backgroundColorSuccess, Color.WHITE)
+            true -> Triple(
+                successMessage ?: "Success!",
+                Constants.backgroundColorSuccess,
+                Color.WHITE
+            )
             false -> Triple(result.error!!, Color.RED, Color.WHITE)
         }
     }

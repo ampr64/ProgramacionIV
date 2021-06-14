@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalAdapter
 import com.example.animalhospital.adapters.VeterinarianAdapter
+import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.Appointment
 import com.example.animalhospital.models.ObjectResult
@@ -27,6 +29,8 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private var selectedDate: LocalDate? = null
     private lateinit var appointmentTp: TimePicker
     private lateinit var reasonEt: EditText
+    private lateinit var reasonTv: TextView
+    private lateinit var reasonWatcher: StatefulTextWatcher
     private lateinit var animalSp: Spinner
     private lateinit var veterinarianSp: Spinner
     private lateinit var setUpAppointmentButton: Button
@@ -46,6 +50,7 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private fun initializeFields() {
         appointmentTp = findViewById(R.id.newAppointment_tp_appointmentTime)
         reasonEt = findViewById(R.id.newAppointment_et_appointmentReason)
+        reasonTv = findViewById(R.id.newAppointment_tv_appointmentReason)
         animalSp = findViewById(R.id.newAppointment_sp_animalList)
         veterinarianSp = findViewById(R.id.newAppointment_sp_veterinarianList)
         setUpAppointmentButton = findViewById(R.id.newAppointment_bt_setUpAppointment)
@@ -65,6 +70,8 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
     private fun setListeners() {
         animalSp.onItemSelectedListener = this
         veterinarianSp.onItemSelectedListener = this
+
+        reasonWatcher = reasonEt.watchNotBlank("Reason", reasonTv)
 
         setUpAppointmentButton.setOnClickListener {
             handleOnSetAppointmentClick()

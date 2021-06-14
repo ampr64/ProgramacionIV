@@ -11,8 +11,8 @@ import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalTypeAdapter
 import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
-import com.example.animalhospital.extensions.EditTextExtensions.Companion.validateInRange
-import com.example.animalhospital.extensions.EditTextExtensions.Companion.validateNotBlank
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchInRange
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.models.ObjectResult
@@ -20,13 +20,11 @@ import com.example.animalhospital.models.ObjectResult
 class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText
     private lateinit var nameTv: TextView
-    private lateinit var nameWatcher: StatefulTextWatcher
     private lateinit var breedEt: EditText
     private lateinit var breedTv: TextView
-    private lateinit var breedWatcher: StatefulTextWatcher
     private lateinit var ageEt: EditText
     private lateinit var ageTv: TextView
-    private lateinit var ageWatcher: StatefulTextWatcher
+    private lateinit var textWatchers: ArrayList<StatefulTextWatcher>
     private lateinit var animalTypeSp: Spinner
     private lateinit var signUpButton: Button
 
@@ -58,9 +56,11 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        nameWatcher = nameEt.validateNotBlank("Name", nameTv)
-        breedWatcher = breedEt.validateNotBlank("Breed", breedTv)
-        ageWatcher = ageEt.validateInRange("Age", MIN_AGE, MAX_AGE, ageTv)
+        val nameWatcher = nameEt.watchNotBlank("Name", nameTv)
+        val breedWatcher = breedEt.watchNotBlank("Breed", breedTv)
+        val ageWatcher = ageEt.watchInRange("Age", MIN_AGE, MAX_AGE, ageTv)
+
+        textWatchers = arrayListOf(nameWatcher, breedWatcher, ageWatcher)
 
         signUpButton.setOnClickListener {
             handleOnSignupClick()
@@ -78,9 +78,7 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun canSubmit(): Boolean {
-        return nameWatcher.isValidState() &&
-                breedWatcher.isValidState() &&
-                ageWatcher.isValidState()
+        return textWatchers.all { tw -> tw.isValidState() }
     }
 
     private fun handleOnSignupClick() {

@@ -7,8 +7,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AppointmentAdapter
+import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
-import com.example.animalhospital.extensions.EditTextExtensions.Companion.validateNotBlank
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
 import com.example.animalhospital.models.Appointment
 import com.example.animalhospital.models.Examination
 import com.example.animalhospital.models.ObjectResult
@@ -19,10 +20,12 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     private lateinit var appointmentSp: Spinner
     private lateinit var diagnosisEt: EditText
     private lateinit var diagnosisTv: TextView
-    private lateinit var medicineEt: EditText
-    private lateinit var medicineTv: TextView
+    private lateinit var diagnosisWatcher: StatefulTextWatcher
     private lateinit var treatmentEt: EditText
     private lateinit var treatmentTv: TextView
+    private lateinit var treatmentWatcher: StatefulTextWatcher
+    private lateinit var medicineEt: EditText
+    private lateinit var medicineTv: TextView
     private lateinit var restDaysEt: EditText
     private lateinit var restDaysTv: TextView
     private lateinit var saveButton: Button
@@ -34,8 +37,6 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
         initializeFields()
         setListeners()
-
-        diagnosisEt.validateNotBlank("Diagnosis")
 
         setSaveButtonState()
     }
@@ -61,6 +62,9 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     private fun setListeners() {
         appointmentSp.onItemSelectedListener = this
+
+        diagnosisWatcher = diagnosisEt.watchNotBlank("Diagnosis", diagnosisTv)
+        treatmentWatcher = treatmentEt.watchNotBlank("Treatment", treatmentTv)
 
         saveButton.setOnClickListener {
             handleOnSaveButtonClick()
@@ -95,8 +99,8 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         return Examination(
             diagnosisEt.text.toString(),
             selectedAppointment!!,
-            medicineEt.text.toString(),
             treatmentEt.text.toString(),
+            medicineEt.text.toString(),
             restDays
         )
     }

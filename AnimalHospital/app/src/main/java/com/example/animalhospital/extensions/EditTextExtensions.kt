@@ -16,8 +16,8 @@ class EditTextExtensions {
             return this.getStringValue().toInt()
         }
 
-        fun EditText.validateNotBlank(
-            fieldName: String,
+        fun EditText.watchNotBlank(
+            fieldName: String? = null,
             outputTv: TextView? = null
         ): StatefulTextWatcher {
             return validateString(
@@ -27,8 +27,8 @@ class EditTextExtensions {
             )
         }
 
-        fun EditText.validateTextMinLength(
-            fieldName: String,
+        fun EditText.watchMinLength(
+            fieldName: String? = null,
             minLength: Int,
             outputTv: TextView? = null
         ): StatefulTextWatcher {
@@ -39,8 +39,8 @@ class EditTextExtensions {
             )
         }
 
-        fun EditText.validateTextMaxLength(
-            fieldName: String,
+        fun EditText.watchMaxLength(
+            fieldName: String? = null,
             maxLength: Int,
             outputTv: TextView? = null
         ): StatefulTextWatcher {
@@ -51,8 +51,8 @@ class EditTextExtensions {
             )
         }
 
-        fun EditText.validateTextLengthInRange(
-            fieldName: String,
+        fun EditText.watchLengthInRange(
+            fieldName: String? = null,
             minLength: Int,
             maxLength: Int,
             outputTv: TextView? = null
@@ -64,8 +64,8 @@ class EditTextExtensions {
             )
         }
 
-        fun EditText.validateMinValue(
-            fieldName: String,
+        fun EditText.watchMinValue(
+            fieldName: String? = null,
             minValue: Int,
             outputTv: TextView? = null
         ): StatefulTextWatcher {
@@ -76,8 +76,8 @@ class EditTextExtensions {
             )
         }
 
-        fun EditText.validateMaxValue(
-            fieldName: String,
+        fun EditText.watchMaxValue(
+            fieldName: String? = null,
             maxValue: Int,
             outputTv: TextView? = null
         ): StatefulTextWatcher {
@@ -88,8 +88,8 @@ class EditTextExtensions {
             )
         }
 
-        fun EditText.validateInRange(
-            fieldName: String,
+        fun EditText.watchInRange(
+            fieldName: String? = null,
             minValue: Int,
             maxValue: Int,
             outputTv: TextView? = null
