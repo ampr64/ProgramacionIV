@@ -11,23 +11,22 @@ import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalTypeAdapter
 import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.validateInRange
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.validateNotBlank
 import com.example.animalhospital.models.Animal
 import com.example.animalhospital.models.AnimalType
 import com.example.animalhospital.models.ObjectResult
-import com.example.animalhospital.textWatchers.AnimalAgeTextWatcher
-import com.example.animalhospital.textWatchers.AnimalBreedTextWatcher
-import com.example.animalhospital.textWatchers.AnimalNameTextWatcher
 
 class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText
     private lateinit var nameTv: TextView
-    private lateinit var nameTextWatcher: StatefulTextWatcher
+    private lateinit var nameWatcher: StatefulTextWatcher
     private lateinit var breedEt: EditText
     private lateinit var breedTv: TextView
-    private lateinit var breedTextWatcher: StatefulTextWatcher
+    private lateinit var breedWatcher: StatefulTextWatcher
     private lateinit var ageEt: EditText
     private lateinit var ageTv: TextView
-    private lateinit var ageTextWatcher: StatefulTextWatcher
+    private lateinit var ageWatcher: StatefulTextWatcher
     private lateinit var animalTypeSp: Spinner
     private lateinit var signUpButton: Button
 
@@ -44,13 +43,10 @@ class AnimalSignupActivity : AppCompatActivity() {
     private fun initializeFields() {
         nameEt = findViewById(R.id.animalSignup_et_animalName)
         nameTv = findViewById(R.id.animalSignup_tv_animalName)
-        nameTextWatcher = AnimalNameTextWatcher(nameTv)
         breedEt = findViewById(R.id.animalSignup_et_animalBreed)
         breedTv = findViewById(R.id.animalSignup_tv_animalBreed)
-        breedTextWatcher = AnimalBreedTextWatcher(breedTv)
         ageEt = findViewById(R.id.animalSignup_et_animalAge)
         ageTv = findViewById(R.id.animalSignup_tv_animalAge)
-        ageTextWatcher = AnimalAgeTextWatcher(ageTv)
         animalTypeSp = findViewById(R.id.animalSignup_spn_animalType)
         signUpButton = findViewById(R.id.animalSignup_btn_signUp)
     }
@@ -62,9 +58,9 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        nameEt.addTextChangedListener(nameTextWatcher)
-        breedEt.addTextChangedListener(breedTextWatcher)
-        ageEt.addTextChangedListener(ageTextWatcher)
+        nameWatcher = nameEt.validateNotBlank("Name", nameTv)
+        breedWatcher = breedEt.validateNotBlank("Breed", breedTv)
+        ageWatcher = ageEt.validateInRange("Age", MIN_AGE, MAX_AGE, ageTv)
 
         signUpButton.setOnClickListener {
             handleOnSignupClick()
@@ -82,9 +78,9 @@ class AnimalSignupActivity : AppCompatActivity() {
     }
 
     private fun canSubmit(): Boolean {
-        return nameTextWatcher.isValidState()
-                && breedTextWatcher.isValidState()
-                && ageTextWatcher.isValidState()
+        return nameWatcher.isValidState() &&
+                breedWatcher.isValidState() &&
+                ageWatcher.isValidState()
     }
 
     private fun handleOnSignupClick() {
@@ -105,5 +101,10 @@ class AnimalSignupActivity : AppCompatActivity() {
             breedEt.text.toString(),
             ageEt.text.toString().toInt()
         )
+    }
+
+    companion object {
+        const val MIN_AGE = 0
+        const val MAX_AGE = 50
     }
 }
