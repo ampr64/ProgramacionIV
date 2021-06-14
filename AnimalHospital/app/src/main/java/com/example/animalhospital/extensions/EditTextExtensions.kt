@@ -16,6 +16,9 @@ class EditTextExtensions {
             return this.getStringValue().toInt()
         }
 
+        fun EditText.getIntValueOrDefault(): Int =
+            if (this.getStringValue().isBlank()) 0 else this.getIntValue()
+
         fun EditText.watchNotBlank(
             fieldName: String? = null,
             outputTv: TextView? = null

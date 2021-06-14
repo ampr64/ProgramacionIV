@@ -9,6 +9,8 @@ import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AppointmentAdapter
 import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.getIntValueOrDefault
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.getStringValue
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
 import com.example.animalhospital.models.Appointment
 import com.example.animalhospital.models.Examination
@@ -94,14 +96,12 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     }
 
     private fun getExaminationFromView(): Examination {
-        val restDays = if (restDaysEt.text.isBlank()) 0 else restDaysEt.text.toString().toInt()
-
         return Examination(
-            diagnosisEt.text.toString(),
+            diagnosisEt.getStringValue(),
             selectedAppointment!!,
-            treatmentEt.text.toString(),
-            medicineEt.text.toString(),
-            restDays
+            treatmentEt.getStringValue(),
+            medicineEt.getStringValue(),
+            restDaysEt.getIntValueOrDefault()
         )
     }
 

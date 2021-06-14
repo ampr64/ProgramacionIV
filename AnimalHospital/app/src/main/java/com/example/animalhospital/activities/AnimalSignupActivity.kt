@@ -11,6 +11,8 @@ import com.example.animalhospital.R
 import com.example.animalhospital.adapters.AnimalTypeAdapter
 import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.getIntValue
+import com.example.animalhospital.extensions.EditTextExtensions.Companion.getStringValue
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchInRange
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
 import com.example.animalhospital.models.Animal
@@ -94,10 +96,10 @@ class AnimalSignupActivity : AppCompatActivity() {
 
     private fun getAnimalFromForm(): Animal {
         return Animal(
-            nameEt.text.toString(),
+            nameEt.getStringValue(),
             AnimalType.getByDisplayName(animalTypeSp.selectedItem.toString()),
-            breedEt.text.toString(),
-            ageEt.text.toString().toInt()
+            breedEt.getStringValue(),
+            ageEt.getIntValue()
         )
     }
 
