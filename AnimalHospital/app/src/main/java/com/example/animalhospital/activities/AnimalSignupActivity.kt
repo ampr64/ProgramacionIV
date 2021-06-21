@@ -96,10 +96,10 @@ class AnimalSignupActivity : AppCompatActivity() {
 
     private fun getAnimalFromForm(): Animal {
         return Animal(
-            nameEt.getStringValue(),
-            AnimalType.getByDisplayName(animalTypeSp.selectedItem.toString()),
-            breedEt.getStringValue(),
-            ageEt.getIntValue()
+                nameEt.getStringValue(),
+                AnimalType.getByDisplayName(animalTypeSp.selectedItem.toString()),
+                breedEt.getStringValue(),
+                ageEt.getIntValue()
         )
     }
 

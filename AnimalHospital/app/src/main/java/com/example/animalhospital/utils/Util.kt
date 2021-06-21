@@ -12,7 +12,7 @@ class Util {
         private const val DEFAULT_FIELD_NAME = "Field"
 
         private fun fieldNameOrDefault(fieldName: String?): String =
-            if (fieldName.isNullOrEmpty()) DEFAULT_FIELD_NAME else fieldName
+                if (fieldName.isNullOrEmpty()) DEFAULT_FIELD_NAME else fieldName
 
         fun emptyFieldTextMessage(fieldName: String? = null): String {
             return "${fieldNameOrDefault(fieldName)} cannot be empty"
@@ -40,10 +40,10 @@ class Util {
         }
 
         fun displayResultMessage(
-            outputElement: TextView,
-            result: Result,
-            duration: Int = 3000,
-            successMessage: String? = null
+                outputElement: TextView,
+                result: Result,
+                duration: Int = 3000,
+                successMessage: String? = null
         ) {
             val (message, bgColor, textColor) = parseResult(result, successMessage)
 
@@ -53,9 +53,9 @@ class Util {
         private fun parseResult(result: Result, successMessage: String?)
                 : Triple<String, Int, Int> = when (result.success) {
             true -> Triple(
-                successMessage ?: "Success!",
-                Constants.backgroundColorSuccess,
-                Color.WHITE
+                    successMessage ?: "Success!",
+                    Constants.backgroundColorSuccess,
+                    Color.WHITE
             )
             false -> Triple(result.error!!, Color.RED, Color.WHITE)
         }

@@ -20,14 +20,14 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private val animals: ArrayList<Animal> = arrayListOf(
-        Animal("Milka", AnimalType.DOG, "Mix", 10),
-        Animal("Afro", AnimalType.CAT, "Tabby", 3)
+            Animal("Milka", AnimalType.DOG, "Mix", 10),
+            Animal("Afro", AnimalType.CAT, "Tabby", 3)
     )
     private val appointments = ArrayList<Appointment>()
     private val examinations = ArrayList<Examination>()
     private val veterinarians = arrayListOf(
-        Veterinarian("Peter", arrayListOf(AnimalType.DOG), 3),
-        Veterinarian("John", arrayListOf(AnimalType.BUNNY, AnimalType.CAT), 2)
+            Veterinarian("Peter", arrayListOf(AnimalType.DOG), 3),
+            Veterinarian("John", arrayListOf(AnimalType.BUNNY, AnimalType.CAT), 2)
     )
     private lateinit var signupLauncher: ActivityResultLauncher<Intent>
     private lateinit var newAppointmentLauncher: ActivityResultLauncher<Intent>
@@ -46,19 +46,19 @@ class MainActivity : AppCompatActivity() {
         disableCalendarPastDates()
 
         signupLauncher = registerForActivityResult(
-            SignupAnimalContract()
+                SignupAnimalContract()
         ) { result ->
             handleOnSignupResult(result)
         }
 
         newAppointmentLauncher = registerForActivityResult(
-            NewAppointmentContract()
+                NewAppointmentContract()
         ) { result ->
             handleOnNewAppointmentResult(result)
         }
 
         newExaminationLauncher = registerForActivityResult(
-            NewExaminationContract()
+                NewExaminationContract()
         ) { result ->
             handleOnNewExaminationResult(result)
         }

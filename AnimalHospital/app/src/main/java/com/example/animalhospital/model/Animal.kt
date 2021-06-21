@@ -2,11 +2,11 @@ package com.example.animalhospital.model
 
 import java.io.Serializable
 
-class Animal(
-    val name: String,
-    val type: AnimalType,
-    val breed: String,
-    var age: Int
+data class Animal(
+        val name: String,
+        val type: AnimalType,
+        val breed: String,
+        var age: Int
 ) : Serializable {
 }
 

@@ -6,15 +6,15 @@ import com.example.animalhospital.model.Appointment
 import java.time.format.DateTimeFormatter
 
 class AppointmentAdapter(
-    context: Context,
-    appointmentList: ArrayList<Appointment>,
+        context: Context,
+        appointmentList: ArrayList<Appointment>,
 ) :
-    HintAdapter(
-        context,
-        appointmentList.map { a ->
-            "${a.dateTime.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))}" +
-                    " - ${a.animal.name}: ${a.reason.lowercase()}"
-        },
-        "Select an appointment"
-    ) {
+        HintAdapter(
+                context,
+                appointmentList.map { a ->
+                    "${a.dateTime.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))}" +
+                            " - ${a.animal.name}: ${a.reason.lowercase()}"
+                },
+                "Select an appointment"
+        ) {
 }

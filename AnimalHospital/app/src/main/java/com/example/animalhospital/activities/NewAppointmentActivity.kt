@@ -113,17 +113,17 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
 
     private fun getAppointmentFromView(): Appointment {
         return Appointment(
-            getDateTime(),
-            selectedAnimal!!,
-            selectedVeterinarian!!,
-            reasonEt.text.toString()
+                getDateTime(),
+                selectedAnimal!!,
+                selectedVeterinarian!!,
+                reasonEt.text.toString()
         )
     }
 
     private fun getDateTime(): LocalDateTime {
         return LocalDateTime.of(
-            selectedDate,
-            LocalTime.of(appointmentTp.hour, appointmentTp.minute)
+                selectedDate,
+                LocalTime.of(appointmentTp.hour, appointmentTp.minute)
         )
     }
 
