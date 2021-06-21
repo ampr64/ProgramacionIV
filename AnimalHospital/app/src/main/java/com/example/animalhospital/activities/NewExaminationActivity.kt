@@ -73,8 +73,20 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         }
     }
 
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        setSaveButtonState()
+    }
+
     private fun setSaveButtonState() {
-        saveButton.isEnabled = true
+        saveButton.isEnabled = canSave()
+    }
+
+    private fun canSave(): Boolean {
+        return diagnosisWatcher.isValidState()
+                && treatmentWatcher.isValidState()
+                && selectedAppointment != null
     }
 
     private fun populateAppointmentSpinner() {
@@ -97,11 +109,11 @@ class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     private fun getExaminationFromView(): Examination {
         return Examination(
-            diagnosisEt.getStringValue(),
-            selectedAppointment!!,
-            treatmentEt.getStringValue(),
-            medicineEt.getStringValue(),
-            restDaysEt.getIntValueOrDefault()
+                diagnosisEt.getStringValue(),
+                selectedAppointment!!,
+                treatmentEt.getStringValue(),
+                medicineEt.getStringValue(),
+                restDaysEt.getIntValueOrDefault()
         )
     }
 

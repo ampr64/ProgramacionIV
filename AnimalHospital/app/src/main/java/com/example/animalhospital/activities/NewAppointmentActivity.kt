@@ -44,7 +44,7 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
 
         appointmentTp.setIs24HourView(true)
 
-        setSetUpAppointmentButtonState()
+        setSetUpAppointmentState()
     }
 
     private fun initializeFields() {
@@ -78,12 +78,21 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         }
     }
 
-    private fun setSetUpAppointmentButtonState() {
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        setSetUpAppointmentState()
+    }
+
+    private fun setSetUpAppointmentState() {
         setUpAppointmentButton.isEnabled = canSetUpNewAppointment()
     }
 
     private fun canSetUpNewAppointment(): Boolean {
-        return getDateTotalAppointmentCount() < MAX_DAILY_APPOINTMENTS
+        return areSlotsLeft()
+                && reasonWatcher.isValidState()
+                && selectedAnimal != null
+                && selectedVeterinarian != null
     }
 
     private fun populateAnimalSpinner() {
@@ -155,10 +164,12 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         }
     }
 
-    private fun getDateTotalAppointmentCount(): Int {
-        return appointments.count { a ->
+    private fun areSlotsLeft(): Boolean {
+        val todayAppointmentsCount = appointments.count { a ->
             a.dateTime.toLocalDate().equals(selectedDate)
         }
+
+        return todayAppointmentsCount < MAX_DAILY_APPOINTMENTS
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
