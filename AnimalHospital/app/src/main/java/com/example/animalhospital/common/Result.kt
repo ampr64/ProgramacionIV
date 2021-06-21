@@ -1,4 +1,4 @@
-package com.example.animalhospital.models
+package com.example.animalhospital.common
 
 import java.io.Serializable
 

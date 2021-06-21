@@ -3,7 +3,7 @@ package com.example.animalhospital.extensions
 import android.widget.EditText
 import android.widget.TextView
 import com.example.animalhospital.common.StatefulTextWatcher
-import com.example.animalhospital.models.Result
+import com.example.animalhospital.common.Result
 import com.example.animalhospital.utils.Util
 
 class EditTextExtensions {

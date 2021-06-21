@@ -2,7 +2,7 @@ package com.example.animalhospital.adapters
 
 import android.content.Context
 import com.example.animalhospital.common.HintAdapter
-import com.example.animalhospital.models.Appointment
+import com.example.animalhospital.model.Appointment
 import java.time.format.DateTimeFormatter
 
 class AppointmentAdapter(

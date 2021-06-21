@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import com.example.animalhospital.constants.Constants
-import com.example.animalhospital.models.Appointment
-import com.example.animalhospital.models.ObjectResult
+import com.example.animalhospital.model.Appointment
+import com.example.animalhospital.common.ObjectResult
 
 class NewAppointmentContract : ActivityResultContract<Intent, ObjectResult<Appointment?>>() {
     override fun createIntent(context: Context, input: Intent): Intent {

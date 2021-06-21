@@ -2,7 +2,7 @@ package com.example.animalhospital.adapters
 
 import android.content.Context
 import android.widget.ArrayAdapter
-import com.example.animalhospital.models.AnimalType
+import com.example.animalhospital.model.AnimalType
 
 class AnimalTypeAdapter(context: Context) : ArrayAdapter<AnimalType>(
     context,

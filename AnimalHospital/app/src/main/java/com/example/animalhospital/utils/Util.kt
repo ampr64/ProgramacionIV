@@ -5,7 +5,7 @@ import android.widget.TextView
 import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.extensions.TextViewExtensions.Companion.clearText
 import com.example.animalhospital.extensions.TextViewExtensions.Companion.showNotification
-import com.example.animalhospital.models.Result
+import com.example.animalhospital.common.Result
 
 class Util {
     companion object {

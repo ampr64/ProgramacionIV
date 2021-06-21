@@ -9,17 +9,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.animalhospital.R
 import com.example.animalhospital.constants.Constants
+import com.example.animalhospital.common.*
 import com.example.animalhospital.contracts.NewAppointmentContract
 import com.example.animalhospital.contracts.NewExaminationContract
 import com.example.animalhospital.contracts.SignupAnimalContract
-import com.example.animalhospital.models.*
+import com.example.animalhospital.model.*
 import com.example.animalhospital.utils.Util
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private val animals: ArrayList<Animal> = arrayListOf(
-        Animal("Mooney", AnimalType.DOG, "Mix", 4),
+        Animal("Milka", AnimalType.DOG, "Mix", 10),
         Animal("Afro", AnimalType.CAT, "Tabby", 3)
     )
     private val appointments = ArrayList<Appointment>()

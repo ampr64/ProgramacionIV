@@ -15,9 +15,9 @@ import com.example.animalhospital.extensions.EditTextExtensions.Companion.getInt
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.getStringValue
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchInRange
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
-import com.example.animalhospital.models.Animal
-import com.example.animalhospital.models.AnimalType
-import com.example.animalhospital.models.ObjectResult
+import com.example.animalhospital.model.Animal
+import com.example.animalhospital.model.AnimalType
+import com.example.animalhospital.common.ObjectResult
 
 class AnimalSignupActivity : AppCompatActivity() {
     private lateinit var nameEt: EditText

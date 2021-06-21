@@ -6,8 +6,8 @@ import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import com.example.animalhospital.activities.AnimalSignupActivity
 import com.example.animalhospital.constants.Constants
-import com.example.animalhospital.models.Animal
-import com.example.animalhospital.models.ObjectResult
+import com.example.animalhospital.model.Animal
+import com.example.animalhospital.common.ObjectResult
 
 class SignupAnimalContract : ActivityResultContract<Intent, ObjectResult<Animal?>>() {
     override fun createIntent(context: Context, input: Intent): Intent {

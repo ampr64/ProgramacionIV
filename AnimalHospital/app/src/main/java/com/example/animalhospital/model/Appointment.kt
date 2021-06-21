@@ -1,4 +1,4 @@
-package com.example.animalhospital.models
+package com.example.animalhospital.model
 
 import java.io.Serializable
 import java.time.LocalDate

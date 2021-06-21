@@ -5,7 +5,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.getStringValue
-import com.example.animalhospital.models.Result
+import com.example.animalhospital.common.Result
 import com.example.animalhospital.utils.Util
 
 abstract class StatefulTextWatcher(

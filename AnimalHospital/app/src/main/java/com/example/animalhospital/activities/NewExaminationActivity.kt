@@ -12,9 +12,9 @@ import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.getIntValueOrDefault
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.getStringValue
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
-import com.example.animalhospital.models.Appointment
-import com.example.animalhospital.models.Examination
-import com.example.animalhospital.models.ObjectResult
+import com.example.animalhospital.model.Appointment
+import com.example.animalhospital.model.Examination
+import com.example.animalhospital.common.ObjectResult
 
 class NewExaminationActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var appointments: ArrayList<Appointment>

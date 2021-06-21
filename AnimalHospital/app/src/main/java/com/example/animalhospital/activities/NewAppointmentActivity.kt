@@ -12,10 +12,10 @@ import com.example.animalhospital.adapters.VeterinarianAdapter
 import com.example.animalhospital.common.StatefulTextWatcher
 import com.example.animalhospital.constants.Constants
 import com.example.animalhospital.extensions.EditTextExtensions.Companion.watchNotBlank
-import com.example.animalhospital.models.Animal
-import com.example.animalhospital.models.Appointment
-import com.example.animalhospital.models.ObjectResult
-import com.example.animalhospital.models.Veterinarian
+import com.example.animalhospital.model.Animal
+import com.example.animalhospital.model.Appointment
+import com.example.animalhospital.common.ObjectResult
+import com.example.animalhospital.model.Veterinarian
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
