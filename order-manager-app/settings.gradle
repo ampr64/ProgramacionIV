@@ -1,0 +1,2 @@
+rootProject.name = "OrderManagerApp"
+include ':app'
