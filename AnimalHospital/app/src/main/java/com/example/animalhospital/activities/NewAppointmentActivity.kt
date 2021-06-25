@@ -58,6 +58,7 @@ class NewAppointmentActivity : AppCompatActivity(), OnItemSelectedListener {
         intent.extras?.apply {
             animals = get(Constants.KEY_ANIMALS) as ArrayList<Animal>
             populateAnimalSpinner()
+            populateVeterinarianSpinner()
 
             appointments = get(Constants.KEY_APPOINTMENTS) as ArrayList<Appointment>
             veterinarians = get(Constants.KEY_VETERINARIANS) as ArrayList<Veterinarian>
